@@ -1,0 +1,36 @@
+/* bugSolution.css */
+
+/* Correcting invalid calculation: adding a missing closing parenthesis */
+.box {
+  width: calc(100% - 20px); /* Added closing parenthesis */
+}
+
+/* Correcting unit mixing: converting percentages to pixels */
+.element {
+  width: calc(50% - 100px); /*Example of a potentially valid calculation, but may cause unexpected results depending on context*/ 
+  /*A more robust solution would require knowing the parent element's width*/
+  /*width: calc((50vw - 100px)); This is potentially better, depending on the context*/
+}
+
+/*Correcting unit mixing: using only one type of unit*/
+.anotherElement{
+  width:calc(100px + 50px); /*Using only pixels*/
+}
+
+/*Using variables for better readability*/
+:root {
+  --element-width: 200px;
+}
+
+.element-with-variable {
+  width: calc(var(--element-width) - 50px);
+}
+
+/* Using functions to calculate values for better maintainability and readability*/
+@function calc-width($width, $offset) {
+  @return calc(#{$width} - #{$offset});
+}
+
+.element-with-function{
+  width: calc-width(500px, 100px);
+}
